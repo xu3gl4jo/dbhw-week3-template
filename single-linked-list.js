@@ -12,32 +12,72 @@ function SinglyLinkedList() {
 SinglyLinkedList.prototype.add = function(data) {
   var node = new Node(data);
   if(!this.head) {
-    //TODO
+    this.head = node;
+    this.tall = node;
   } else {
-    //TODO
+    this.tail.next = node;
+    this.tail = node;
   }
-
+this.numberOfValues++;
 };
 
 SinglyLinkedList.prototype.remove = function(data) {
   var previous = this.head;
   var current = this.head;
-  //TODO
+  while(current){
+    if(current.data === data){
+      if(current === this.head){
+        this.head = this.head.next;
+      }
+      if(current === this.tail){
+        this.tail = previous;
+      }
+      previous.next = current.next;
+      this.numberOfValue--;
+    }else{
+      previous = current;
+    }
+    current = current.next;
+  }
+  
 };
 
 SinglyLinkedList.prototype.insertAfter = function(data, toNodeData) {
   var current = this.head;
-  //TODO
+  while(current){
+    if(current.data === toNodeData){
+      var node = new Node(data);
+      if(current === this.tail){
+        this.tail.next = node;
+        this.tail = node;
+      }else{
+        node.next = current.next;
+        current.next = node;
+      }
+      this.numberOfValue++;
+    }
+    current = current.next;
+  }
 };
 
 SinglyLinkedList.prototype.length = function() {
-  //TODO
+  return this.numberOfValue;
 };
 
 SinglyLinkedList.prototype.print = function() {
-  //TODO
+  var string = '';
+  var current = this.head;
+  while(current){
+    string += current.data + ' ';
+    current = current.next;
+  }
+  return string.trim();
 };
 
+module.exports = {
+  SinglyLinkedList : SinglyLinkedList,
+  Node : Node;
+};
 
 /*
 singlyLinkedList.print(); // => ''
